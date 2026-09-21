@@ -21,6 +21,7 @@ apple_touch_icon: avatar.png # image name in /assets/img/ (or a rooted path / ab
 
 url: https://khanhvx09.github.io # the base hostname & protocol for your site
 baseurl: # the subpath of your site, e.g. /blog/. Leave blank for root
+timezone: Asia/Singapore # dates without an offset are read in this zone; otherwise Jekyll uses the build machine's (UTC in Docker)
 last_updated: false # set to true if you want to display last updated in the footer
 impressum_path: # set to path to include impressum link in the footer, use the same path as permalink in a page, helps to conform with EU GDPR
 back_to_top: true # set to false to disable the back to top button

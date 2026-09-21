@@ -1,20 +1,30 @@
 ---
-layout: post
+layout: distill
 title: Data Lake, Hadoop, Spark và ETL - bức tranh tổng thể
-date: 2026-09-21 23:00:00
+date: 2026-09-21 23:00:00 +0800
 description: Tổng quan big data stack, từ Hadoop đến Spark, và vị trí của ETL trong Data Lake
 tags: data-engineering data-lake hadoop spark etl
 categories: data-engineering
 mermaid:
   enabled: true
   zoomable: true
+
+authors:
+  - name: Khanh Xuan Vu
+
 toc:
-  sidebar: left
+  - name: Vấn đề ban đầu
+  - name: "Data Lake: nơi lưu dữ liệu"
+  - name: "Hadoop: thế hệ đầu tiên"
+  - name: "Spark: thế hệ tiếp theo"
+  - name: "ETL: luồng dữ liệu chạy giữa storage và compute"
+  - name: Bức tranh tổng thể
+  - name: Tiếp theo
 ---
 
 Khi bắt đầu với data engineering, ta thường gặp một loạt thuật ngữ cùng lúc: Data Lake, Hadoop, Spark, ETL. Bài này đặt chúng vào một bức tranh chung: cái nào lo việc **lưu**, cái nào lo việc **tính**, và ETL nằm ở đâu. Các bài sau sẽ đi sâu từng phần.
 
-## 1. Vấn đề ban đầu
+## Vấn đề ban đầu
 
 Khi dữ liệu vượt quá khả năng của một máy, ta gặp hai bài toán tách biệt:
 
@@ -23,7 +33,7 @@ Khi dữ liệu vượt quá khả năng của một máy, ta gặp hai bài to�
 
 Toàn bộ big data stack là lời giải cho hai câu hỏi này. Nhớ cách chia này, vì nó xuất hiện xuyên suốt bài viết.
 
-## 2. Data Lake: nơi lưu dữ liệu
+## Data Lake: nơi lưu dữ liệu
 
 **Data Lake** là kho lưu trữ dữ liệu ở dạng **thô**, với mọi định dạng: bảng từ database, file CSV/JSON, log, ảnh, và cả dữ liệu streaming.
 
@@ -36,7 +46,7 @@ Ban đầu Data Lake được xây trên **HDFS**. Ngày nay phần lớn dùng 
 
 Lưu ý: Data Lake không được quản trị tốt sẽ biến thành _data swamp_, tức là kho dữ liệu không ai biết bên trong có gì, có đáng tin không.
 
-## 3. Hadoop: thế hệ đầu tiên
+## Hadoop: thế hệ đầu tiên
 
 Hadoop là hệ sinh thái mã nguồn mở đầu tiên giải quyết cả hai bài toán trên cụm nhiều máy thông thường. Ba thành phần cốt lõi:
 
@@ -51,7 +61,7 @@ Hadoop chứng minh được rằng có thể xử lý dữ liệu lớn bằng 
 - **Chậm**: mỗi bước đều ghi kết quả trung gian xuống đĩa.
 - **Khó viết**: logic phức tạp phải ghép nhiều job MapReduce lại với nhau.
 
-## 4. Spark: thế hệ tiếp theo
+## Spark: thế hệ tiếp theo
 
 **Apache Spark** ra đời để giải quyết đúng hai hạn chế đó, và là engine **compute** chính hiện nay.
 
@@ -62,7 +72,7 @@ Hadoop chứng minh được rằng có thể xử lý dữ liệu lớn bằng 
 
 Một điểm cần nhớ: **Spark chỉ là compute**. Nó không có storage riêng, mà đọc và ghi dữ liệu trên HDFS, S3 hoặc nơi khác. Nhờ vậy Spark không bắt buộc phải chạy trên Hadoop.
 
-## 5. ETL: luồng dữ liệu chạy giữa storage và compute
+## ETL: luồng dữ liệu chạy giữa storage và compute
 
 **ETL** là quy trình đưa dữ liệu từ nguồn về dạng dùng được:
 
@@ -85,7 +95,7 @@ flowchart LR
     D --> E[BI / ML / Query]
 ```
 
-## 6. Bức tranh tổng thể
+## Bức tranh tổng thể
 
 Ghép các mảnh lại:
 
@@ -112,7 +122,7 @@ flowchart TB
 
 Đây cũng là thay đổi lớn nhất giữa hai thế hệ: **tách storage khỏi compute**. Trên cloud, dữ liệu nằm ở S3 còn cụm Spark bật lên khi cần và tắt khi xong. Ta chỉ trả tiền compute khi thật sự tính, và có thể mở rộng hai phần độc lập với nhau.
 
-## 7. Tiếp theo
+## Tiếp theo
 
 Các bài sau sẽ đi vào từng phần:
 
