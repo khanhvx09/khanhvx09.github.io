@@ -3,8 +3,8 @@ layout: distill
 title: Introduction to Hadoop Distributed File System
 date: 2026-09-22 08:00:00 +0800
 published: true
-description: Tổng quan về Hadoop
-tags: data-engineering data-lake hadoop
+description: Tổng quan về HDFS
+tags: data-engineering data-lake hadoop hdfs
 categories: data-engineering
 mermaid:
   enabled: false
