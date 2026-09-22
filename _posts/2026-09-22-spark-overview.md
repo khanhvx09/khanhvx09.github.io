@@ -4,7 +4,7 @@ title: Overview of Big Data Analytics
 date: 2026-09-22 08:00:00 +0800
 published: true
 description: Tổng quan về phân tích dữ liệu lớn
-tags: data-engineering data-lake big-data
+tags: big-data spark
 categories: data-engineering
 mermaid:
   enabled: false
