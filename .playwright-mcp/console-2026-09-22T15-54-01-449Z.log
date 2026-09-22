@@ -1,0 +1,1 @@
+[   72264ms] [ERROR] Connecting to 'ws://127.0.0.1:35729/livereload' violates the following Content Security Policy directive: "connect-src 'self' https:". The action has been blocked. @ http://127.0.0.1:35729/livereload.js?snipver=1&port=35729:73

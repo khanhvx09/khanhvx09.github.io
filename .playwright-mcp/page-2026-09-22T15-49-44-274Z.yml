@@ -1,0 +1,97 @@
+- generic [active] [ref=e1]:
+  - banner:
+    - navigation [ref=e2]:
+      - generic [ref=e3]:
+        - link "Khanh Xuan Vu" [ref=e4] [cursor=pointer]:
+          - /url: /
+        - list [ref=e6]:
+          - listitem [ref=e7]:
+            - link "about" [ref=e8] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e9]:
+            - link "blog" [ref=e10] [cursor=pointer]:
+              - /url: /blog/
+          - listitem [ref=e11]:
+            - link "CV" [ref=e12] [cursor=pointer]:
+              - /url: /cv/
+          - listitem [ref=e13]:
+            - button "Open search" [ref=e14] [cursor=pointer]:
+              - generic [ref=e15]: ⌘ k
+          - listitem [ref=e17]:
+            - button "Change color theme" [ref=e18] [cursor=pointer]:
+              - generic [ref=e19]:  
+    - progressbar [ref=e20]
+  - generic [ref=e21]:
+    - generic [ref=e22]:
+      - heading "Overview of Big Data Analytics" [level=1] [ref=e23]
+      - paragraph [ref=e24]: Tổng quan về phân tích dữ liệu lớn
+    - generic [ref=e26]:
+      - generic [ref=e27]:
+        - heading "Authors" [level=3] [ref=e28]
+        - heading "Affiliations" [level=3] [ref=e29]
+        - paragraph [ref=e30]: Khanh Xuan Vu
+        - paragraph [ref=e31]
+      - generic [ref=e32]:
+        - heading "Published" [level=3] [ref=e33]
+        - paragraph [ref=e34]: Sept. 22, 2026
+    - generic [ref=e35]:
+      - navigation [ref=e37]:
+        - heading "Contents" [level=3] [ref=e38]
+        - link "Introduction to big data" [ref=e40] [cursor=pointer]:
+          - /url: "#introduction-to-big-data"
+        - link "The MapReduce Framework" [ref=e42] [cursor=pointer]:
+          - /url: "#the-mapreduce-framework"
+        - link "Apache Spark" [ref=e44] [cursor=pointer]:
+          - /url: "#apache-spark"
+      - paragraph [ref=e45]: Bài viết này sẽ cung cấp một cái nhìn tổng quan về phân tích dữ liệu lớn (big data analytics), bao gồm các khái niệm cơ bản, các công nghệ phổ biến và cách chúng được sử dụng để xử lý và phân tích dữ liệu lớn.
+      - heading "Introduction to big data" [level=2] [ref=e46]
+      - paragraph [ref=e47]:
+        - text: Theo
+        - link "IBM" [ref=e48] [cursor=pointer]:
+          - /url: https://www.ibm.com/think/topics/big-data
+        - text: ", dữ liệu lớn (big data) là một tập hợp các dữ liệu có kích thước lớn, tốc độ tăng nhanh và đa dạng, khiến các công cụ phân tích truyền thống không thể xử lý hiệu quả."
+      - paragraph [ref=e49]: "Dưới đây là 5 chữ V (5 Vs) của dữ liệu lớn, được sử dụng để mô tả các đặc tính của dữ liệu lớn:"
+      - heading "Variety of data" [level=3] [ref=e50]
+      - paragraph [ref=e51]: Data có thể đến từ nhiều nguồn dữ liệu khác nhau, như là thời tiết, mạng xã hội, cảm biến IoT, giao dịch tài chính, và nhiều nguồn khác. Dữ liệu có thể ở dạng cấu trúc (structured), bán cấu trúc (semi-structured) hoặc phi cấu trúc (unstructured).
+      - heading "Velocity of data" [level=3] [ref=e52]
+      - paragraph [ref=e53]: Data có thể đến từ data warehouse, các file định kỳ hoặc các luồng dữ liệu trực tiếp (streaming data). Dữ liệu có thể được tạo ra với tốc độ cao, ví dụ như dữ liệu từ mạng xã hội hoặc cảm biến IoT. Velocity đề cập đến tốc độ mà dữ liệu được tạo ra và tốc độ mà dữ liệu cần được xử lý và phân tích.
+      - heading "Volume of data" [level=3] [ref=e54]
+      - paragraph [ref=e55]: Dữ liệu lớn thường có kích thước rất lớn, từ hàng terabyte đến petabyte hoặc thậm chí exabyte. Volume đề cập đến kích thước của dữ liệu và khả năng lưu trữ và xử lý dữ liệu lớn.
+      - heading "Veracity of data" [level=3] [ref=e56]
+      - paragraph [ref=e57]: Dữ liệu lớn có thể chứa nhiều thông tin không chính xác hoặc không đầy đủ. Veracity đề cập đến độ tin cậy và chất lượng của dữ liệu, và việc xử lý dữ liệu lớn đòi hỏi các kỹ thuật để làm sạch và xác thực dữ liệu.
+      - heading "Value of data" [level=3] [ref=e58]
+      - paragraph [ref=e59]: Dữ liệu lớn có thể mang lại giá trị lớn nếu được phân tích và sử dụng đúng cách. Value đề cập đến khả năng khai thác giá trị từ dữ liệu lớn thông qua các kỹ thuật phân tích dữ liệu, học máy (machine learning) và trí tuệ nhân tạo (artificial intelligence).
+      - heading "The MapReduce Framework" [level=2] [ref=e60]
+      - paragraph [ref=e61]: "MapReduce là một mô hình (framework) được sử dụng để tính toán lượng lớn dữ liệu trong một cụm Hadoop. MapReduces chia quá trình xử lý dữ liệu thành hai bước chính: Map và Reduce. Trong bước Map, dữ liệu được chia thành các cặp key-value và được xử lý song song trên nhiều nút (nodes) trong cụm Hadoop. Trong bước Reduce, các kết quả từ bước Map được tổng hợp lại để tạo ra kết quả cuối cùng."
+      - figure [ref=e62]:
+        - img "MapReduce" [ref=e64]
+      - heading "Apache Spark" [level=2] [ref=e65]
+      - paragraph [ref=e66]: Apache Spark là một công cụ tính toán phân tán hợp nhất (unified distributed computing engine), được thiết kế để xử lý dữ liệu lớn một cách nhanh chóng và hiệu quả.
+      - figure [ref=e67]:
+        - img "MapReduce" [ref=e69]
+      - paragraph [ref=e70]: Apache Spark là một engine xử lý dữ liệu nhanh chóng trên RAM, giúp tăng tốc độ xử lý dữ liệu lớn so với các công cụ truyền thống như Hadoop MapReduce.
+      - paragraph [ref=e71]: Spark cung cấp một API dễ sử dụng cho các ngôn ngữ lập trình phổ biến như Java, Scala, Python và R, và hỗ trợ nhiều loại dữ liệu khác nhau, bao gồm dữ liệu cấu trúc, bán cấu trúc và phi cấu trúc. Các thành phần chính của Spark bao gồm Spark Core, Spark SQL, Spark Streaming, MLlib và GraphX. Spark có thể chạy trên nhiều nền tảng khác nhau, bao gồm Hadoop YARN, Apache Mesos và Kubernetes.
+      - heading "Spark Architecture" [level=3] [ref=e72]
+    - generic [ref=e74]:
+      - heading "Enjoy Reading This Article?" [level=2] [ref=e75]
+      - paragraph [ref=e76]: "Here are some more articles you might like to read next:"
+      - list [ref=e77]:
+        - listitem [ref=e78]:
+          - link "Introduction to Hadoop Distributed File System" [ref=e79] [cursor=pointer]:
+            - /url: /blog/2026/hadoop-overview/
+  - contentinfo [ref=e80]:
+    - generic [ref=e81]:
+      - text: © Copyright 2026 Khanh Xuan Vu. Powered by
+      - link "Jekyll" [ref=e82] [cursor=pointer]:
+        - /url: https://jekyllrb.com/
+      - text: with
+      - link "al-folio" [ref=e83] [cursor=pointer]:
+        - /url: https://github.com/alshedivat/al-folio
+      - text: theme. Hosted by
+      - link "GitHub Pages" [ref=e84] [cursor=pointer]:
+        - /url: https://pages.github.com/
+      - text: . Photos from
+      - link "Unsplash" [ref=e85] [cursor=pointer]:
+        - /url: https://unsplash.com
+      - text: .
+  - generic [ref=e86] [cursor=pointer]

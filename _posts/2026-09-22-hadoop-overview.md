@@ -35,7 +35,7 @@ Khi có một lớp trừu lượng (abstraction block) trên hệ thống tệp
 ## Name Node
 NameNode là máy chủ chính trong HDFS, chịu trách nhiệm quản lý thông tin metadata của hệ thống file: filename, file permission và vị trí các block (block location) trên các DataNode. NameNode không lưu trữ dữ liệu thực tế mà chỉ lưu trữ thông tin về cách dữ liệu được phân tán trên các DataNode.
 
-NameNode lưu trữ thông tin metadata trong bộ nhớ (RAM) để truy cập nhanh chóng. Khi một client muốn đọc hoặc ghi dữ liệu, nó sẽ liên hệ với NameNode để lấy thông tin về vị trí các block cần thiết. Bời vì, NameNode là một điểm quan trọng trong HDFS,nếu NameNode gặp sự cố, toàn bộ hệ thống HDFS có thể bị gián đoạn. Do đó, các triển khai HDFS thường sử dụng cơ chế sao lưu (backup) hoặc triển khai NameNode dự phòng (standby NameNode) để đảm bảo tính sẵn sàng cao.
+NameNode lưu trữ thông tin metadata trong bộ nhớ (RAM) để truy cập nhanh chóng. Khi một client muốn đọc hoặc ghi dữ liệu, nó sẽ liên hệ với NameNode để lấy thông tin về vị trí các block cần thiết. Bởi vì, NameNode là một điểm quan trọng trong HDFS, nếu NameNode gặp sự cố, toàn bộ hệ thống HDFS có thể bị gián đoạn. Do đó, các triển khai HDFS thường sử dụng cơ chế sao lưu (backup) hoặc triển khai NameNode dự phòng (standby NameNode) để đảm bảo tính sẵn sàng cao.
 
 ## Data Node
 
@@ -76,11 +76,3 @@ $$
 | Chia thành các file nhỏ 1 MB | 1024 file → 1024 block | 2048 | ~300 KB |
 
 Cùng một lượng dữ liệu, nhưng cách chia nhỏ file tốn RAM NameNode gấp ~128 lần. Đây là lý do các hệ thống thực tế thường có bước gộp file nhỏ (compaction) trước khi ghi vào HDFS, hoặc dùng các định dạng lưu trữ theo container (như SequenceFile, Avro, Parquet) để nhiều bản ghi nhỏ được đóng gói chung vào một file lớn thay vì tạo ra hàng loạt file riêng lẻ.
-
-
-## Tiếp theo
-
-Các bài sau sẽ đi vào từng phần:
-
-1. Spark: kiến trúc và cách hoạt động
-2. Data Lake: tổ chức dữ liệu (ETL vs ELT và mô hình tổ chức dữ liệu Medallion)
