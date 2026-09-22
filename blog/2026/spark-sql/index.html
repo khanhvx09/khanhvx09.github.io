@@ -1,0 +1,316 @@
+<!DOCTYPE html> <html> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Spark SQL | Khanh Xuan Vu </title> <meta name="author" content="Khanh Xuan Vu"> <meta name="description" content="Thao tác với dữ liệu có cấu trúc bằng Spark SQL"> <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/assets/img/avatar.png?v=8ed39bb65f3f9d73a700003e5ea5cdd8"> <link rel="apple-touch-icon" href="/assets/img/avatar.png?v=8ed39bb65f3f9d73a700003e5ea5cdd8"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://khanhvx09.github.io/blog/2026/spark-sql/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> <link rel="stylesheet" href="/assets/css/al-folio-distill.css?v=fb7196ec07cb5299d51b2cbdc69c23d7"> <script>
+  window.alFolioDistill = window.alFolioDistill || {};
+  window.alFolioDistill.templateLoader = {"url":"/assets/js/distillpub/template.v2.js","integrity":"sha256-R5CDHO0C98TyAJss32l4ztqDUfAGDTtZ3Zs6qxMuJxo=","remote":false};
+</script> <script src="/assets/js/distillpub/template.v2.js" integrity="sha256-R5CDHO0C98TyAJss32l4ztqDUfAGDTtZ3Zs6qxMuJxo="></script> <script src="/assets/js/distillpub/transforms.v2.js" integrity="sha256-XYVZD1ZSuRCrJBEBl0nIPvWlo/u5tzmtyStFV7a/PTk="></script> <style type="text/css">
+        d-article h2 { margin: 1.5rem 0 1rem 0; padding-bottom: 0.5rem; }
+d-article h3 { margin-top: 1.25em; margin-bottom: 0.5em; }
+d-article p, d-article ul, d-article ol, d-article blockquote { margin-bottom: 0.75em; }
+/* Widen the article's reading column a bit, reclaiming part of Distill's
+   margin-note gutter (unused since posts don't use d-footnote/aside).
+   Stops at middle-end rather than gutter-end: extending all the way to
+   gutter-end pushed the column's visual center ~85px right of the
+   viewport's center, since the left edge is pinned at text-start by the
+   TOC sitting immediately to its left. */
+d-article > * { grid-column: text-start / middle-end !important; }
+/* Keep the table of contents pinned to the left as the article scrolls
+   (66px top offset matches the fixed navbar height used elsewhere, e.g.
+   d-footnote's scroll-margin-top). */
+d-article d-contents {
+  grid-column: 1 / 4 !important;
+  position: sticky !important;
+  top: 76px !important;
+  align-self: start !important;
+  max-height: calc(100vh - 96px);
+  overflow-y: auto;
+}
+
+      </style> </head> <body> <d-front-matter> <script async type="text/json">
+      {
+            "title": "Spark SQL",
+            "description": "Thao tác với dữ liệu có cấu trúc bằng Spark SQL",
+            "published": "September 22, 2026",
+            "authors": [
+              
+              {
+                "author": "Khanh Xuan Vu",
+                "authorURL": "",
+                "affiliations": [
+                  {
+                    "name": "",
+                    "url": ""
+                  }
+                ]
+              }
+              
+            ],
+            "katex": {
+              "delimiters": [
+                {
+                  "left": "$",
+                  "right": "$",
+                  "display": false
+                },
+                {
+                  "left": "$$",
+                  "right": "$$",
+                  "display": true
+                }
+              ]
+            }
+          }
+    </script> </d-front-matter> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Khanh</span> Xuan Vu </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="post distill"> <d-title> <h1>Spark SQL</h1> <p>Thao tác với dữ liệu có cấu trúc bằng Spark SQL</p> </d-title> <d-byline></d-byline> <d-article> <d-contents> <nav class="l-text figcaption"> <h3>Contents</h3> <div> <a href="#create-table">Create table</a> </div> <div> <a href="#select-v%C3%A0-c%C3%A1c-ph%C3%A9p-l%E1%BB%8Dc-c%C6%A1-b%E1%BA%A3n">SELECT và các phép lọc cơ bản</a> </div> <div> <a href="#join">JOIN</a> </div> <div> <a href="#group-by-v%C3%A0-having">GROUP BY và HAVING</a> </div> <div> <a href="#window-function">Window Function</a> </div> <div> <a href="#rank-dense-rank-row-number">RANK, DENSE_RANK, ROW_NUMBER</a> </div> <div> <a href="#subquery">Subquery</a> </div> <div> <a href="#with-common-table-expression">WITH (Common Table Expression)</a> </div> <div> <a href="#view-v%C3%A0-temporary-view">View và Temporary View</a> </div> </nav> </d-contents> <p>Bài viết này tiếp nối bài <a href="/blog/2026/spark-overview/">Apache Spark Overview</a>, đi sâu vào Spark SQL: cách đọc dữ liệu từ các định dạng phổ biến (CSV, JSON, Parquet) thành bảng, và các mẫu truy vấn SQL thường dùng khi phân tích dữ liệu trên Spark — từ <code class="language-plaintext highlighter-rouge">SELECT</code>, <code class="language-plaintext highlighter-rouge">JOIN</code>, <code class="language-plaintext highlighter-rouge">GROUP BY</code> cơ bản đến window function và subquery.</p> <h2 id="create-table">Create table</h2> <p>Giới thiệu 3 định dạng dữ liệu phổ biến và cách đọc mỗi loại thành DataFrame bằng <code class="language-plaintext highlighter-rouge">spark.read</code>, sau đó đăng ký thành bảng/view để truy vấn bằng SQL qua <code class="language-plaintext highlighter-rouge">spark.sql(...)</code>.</p> <ul> <li>Đọc CSV (<code class="language-plaintext highlighter-rouge">header</code>, <code class="language-plaintext highlighter-rouge">inferSchema</code>, <code class="language-plaintext highlighter-rouge">sep</code>)</li> <li>Đọc Parquet (schema tự mô tả, columnar, nén tốt — so sánh nhanh với CSV/JSON)</li> </ul> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> <span class="n">employees</span> <span class="p">(</span>
+  <span class="n">id</span>      <span class="nb">INT</span>     <span class="k">COMMENT</span> <span class="s1">'Mã nhân viên, khoá chính'</span><span class="p">,</span>
+  <span class="n">name</span>    <span class="n">STRING</span>  <span class="k">COMMENT</span> <span class="s1">'Họ tên đầy đủ'</span><span class="p">,</span>
+  <span class="n">city</span>    <span class="n">STRING</span>  <span class="k">COMMENT</span> <span class="s1">'Thành phố nơi làm việc'</span><span class="p">,</span>
+  <span class="n">salary</span>  <span class="nb">DOUBLE</span>  <span class="k">COMMENT</span> <span class="s1">'Lương theo tháng, đơn vị USD'</span>
+<span class="p">)</span>
+<span class="k">COMMENT</span> <span class="s1">'Bảng thông tin nhân viên, cập nhật hàng ngày từ hệ thống HR'</span>
+<span class="n">STORED</span> <span class="k">AS</span> <span class="n">PARQUET</span>
+<span class="k">LOCATION</span> <span class="s1">'path/to/employees'</span><span class="p">;</span>
+
+<span class="c1">-- Xem lại comment của bảng và từng cột</span>
+<span class="k">DESCRIBE</span> <span class="k">TABLE</span> <span class="n">EXTENDED</span> <span class="n">employees</span><span class="p">;</span>
+</code></pre></div></div> <p>Với file CSV dùng ký tự phân tách khác dấu phẩy (ví dụ <code class="language-plaintext highlighter-rouge">|</code>), khai báo thêm <code class="language-plaintext highlighter-rouge">delimiter</code> (hoặc <code class="language-plaintext highlighter-rouge">sep</code>) trong <code class="language-plaintext highlighter-rouge">OPTIONS</code>:</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> <span class="n">orders</span> <span class="p">(</span>
+  <span class="n">order_id</span>     <span class="nb">INT</span>     <span class="k">COMMENT</span> <span class="s1">'Mã đơn hàng, khoá chính'</span><span class="p">,</span>
+  <span class="n">customer_id</span>  <span class="nb">INT</span>     <span class="k">COMMENT</span> <span class="s1">'Mã khách hàng'</span><span class="p">,</span>
+  <span class="n">product</span>      <span class="n">STRING</span>  <span class="k">COMMENT</span> <span class="s1">'Tên sản phẩm'</span><span class="p">,</span>
+  <span class="n">amount</span>       <span class="nb">DOUBLE</span>  <span class="k">COMMENT</span> <span class="s1">'Giá trị đơn hàng, đơn vị USD'</span>
+<span class="p">)</span>
+<span class="k">USING</span> <span class="n">csv</span>
+<span class="k">COMMENT</span> <span class="s1">'Bảng đơn hàng, dữ liệu nguồn dạng CSV phân tách bằng dấu |'</span>
+<span class="k">OPTIONS</span> <span class="p">(</span>
+  <span class="n">path</span> <span class="nv">"path/to/orders"</span><span class="p">,</span>
+  <span class="n">header</span> <span class="nv">"true"</span><span class="p">,</span>
+  <span class="k">delimiter</span> <span class="nv">"|"</span>
+<span class="p">);</span>
+
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">orders</span> <span class="k">LIMIT</span> <span class="mi">10</span><span class="p">;</span>
+</code></pre></div></div> <blockquote> <p><strong>Lưu ý:</strong> khi đặt tên bảng, nên theo format <code class="language-plaintext highlighter-rouge">[source_system]_[table_name]</code> (ví dụ <code class="language-plaintext highlighter-rouge">hr_employees</code>, <code class="language-plaintext highlighter-rouge">erp_orders</code>) thay vì chỉ dùng tên bảng đơn thuần như <code class="language-plaintext highlighter-rouge">employees</code>, <code class="language-plaintext highlighter-rouge">orders</code>. Cách đặt tên này giúp:</p> <ul> <li>Biết ngay dữ liệu bảng đến từ hệ thống nguồn nào chỉ bằng cách nhìn tên bảng, không cần tra lineage/metadata.</li> <li>Tránh đụng tên khi nhiều hệ thống nguồn cùng có bảng trùng tên (ví dụ cả HR và ERP đều có bảng <code class="language-plaintext highlighter-rouge">employees</code>).</li> <li>Dễ nhóm, filter bảng theo nguồn khi liệt kê danh sách bảng trong catalog.</li> </ul> </blockquote> <h2 id="select-và-các-phép-lọc-cơ-bản">SELECT và các phép lọc cơ bản</h2> <p>Cú pháp <code class="language-plaintext highlighter-rouge">SELECT ... FROM ... WHERE ...</code> trong Spark SQL, chọn cột, đặt alias, lọc điều kiện, <code class="language-plaintext highlighter-rouge">ORDER BY</code>, <code class="language-plaintext highlighter-rouge">LIMIT</code>, <code class="language-plaintext highlighter-rouge">DISTINCT</code>.</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span> <span class="k">AS</span> <span class="n">alias_name</span>
+<span class="k">FROM</span> <span class="n">my_table</span>
+<span class="k">WHERE</span> <span class="n">condition</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column1</span> <span class="k">DESC</span>
+<span class="k">LIMIT</span> <span class="mi">10</span><span class="p">;</span>
+</code></pre></div></div> <h2 id="join">JOIN</h2> <p>Các loại join: <code class="language-plaintext highlighter-rouge">INNER JOIN</code>, <code class="language-plaintext highlighter-rouge">LEFT/RIGHT OUTER JOIN</code>, <code class="language-plaintext highlighter-rouge">FULL OUTER JOIN</code>, <code class="language-plaintext highlighter-rouge">CROSS JOIN</code>, và lưu ý về shuffle khi join hai bảng lớn (liên hệ lại phần wide transformation ở bài overview).</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">a</span><span class="p">.</span><span class="o">*</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="o">*</span>
+<span class="k">FROM</span> <span class="n">table_a</span> <span class="n">a</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">table_b</span> <span class="n">b</span>
+  <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div> <h2 id="group-by-và-having">GROUP BY và HAVING</h2> <p>Tổng hợp dữ liệu theo nhóm với <code class="language-plaintext highlighter-rouge">GROUP BY</code> và các hàm aggregate (<code class="language-plaintext highlighter-rouge">COUNT</code>, <code class="language-plaintext highlighter-rouge">SUM</code>, <code class="language-plaintext highlighter-rouge">AVG</code>, <code class="language-plaintext highlighter-rouge">MAX</code>, <code class="language-plaintext highlighter-rouge">MIN</code>), lọc kết quả sau khi group bằng <code class="language-plaintext highlighter-rouge">HAVING</code> (khác với <code class="language-plaintext highlighter-rouge">WHERE</code> lọc trước khi group).</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">city</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="n">num_people</span><span class="p">,</span> <span class="k">AVG</span><span class="p">(</span><span class="n">age</span><span class="p">)</span> <span class="k">AS</span> <span class="n">avg_age</span>
+<span class="k">FROM</span> <span class="n">my_table</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">city</span>
+<span class="k">HAVING</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">;</span>
+</code></pre></div></div> <h2 id="window-function">Window Function</h2> <p>Khái niệm window function: tính toán trên một “cửa sổ” các dòng liên quan mà không gộp (collapse) dòng như <code class="language-plaintext highlighter-rouge">GROUP BY</code>. Cú pháp <code class="language-plaintext highlighter-rouge">OVER (PARTITION BY ... ORDER BY ...)</code>.</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span>
+  <span class="n">name</span><span class="p">,</span>
+  <span class="n">city</span><span class="p">,</span>
+  <span class="n">salary</span><span class="p">,</span>
+  <span class="k">AVG</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">PARTITION</span> <span class="k">BY</span> <span class="n">city</span><span class="p">)</span> <span class="k">AS</span> <span class="n">avg_salary_by_city</span>
+<span class="k">FROM</span> <span class="n">my_table</span><span class="p">;</span>
+</code></pre></div></div> <h2 id="rank-dense_rank-row_number">RANK, DENSE_RANK, ROW_NUMBER</h2> <p>So sánh 3 hàm xếp hạng thường bị nhầm lẫn:</p> <ul> <li> <code class="language-plaintext highlighter-rouge">ROW_NUMBER()</code>: đánh số thứ tự duy nhất, không có giá trị trùng nhau</li> <li> <code class="language-plaintext highlighter-rouge">RANK()</code>: các dòng bằng nhau nhận cùng hạng, hạng tiếp theo bị nhảy số</li> <li> <code class="language-plaintext highlighter-rouge">DENSE_RANK()</code>: các dòng bằng nhau nhận cùng hạng, hạng tiếp theo không bị nhảy số</li> </ul> <p>Có thể minh họa bằng một bảng ví dụ trước/sau khi áp dụng cả 3 hàm trên cùng một tập dữ liệu có giá trị trùng nhau.</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span>
+  <span class="n">name</span><span class="p">,</span>
+  <span class="n">city</span><span class="p">,</span>
+  <span class="n">salary</span><span class="p">,</span>
+  <span class="n">ROW_NUMBER</span><span class="p">()</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">PARTITION</span> <span class="k">BY</span> <span class="n">city</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">salary</span> <span class="k">DESC</span><span class="p">)</span> <span class="k">AS</span> <span class="n">row_num</span><span class="p">,</span>
+  <span class="n">RANK</span><span class="p">()</span>       <span class="n">OVER</span> <span class="p">(</span><span class="k">PARTITION</span> <span class="k">BY</span> <span class="n">city</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">salary</span> <span class="k">DESC</span><span class="p">)</span> <span class="k">AS</span> <span class="n">rnk</span><span class="p">,</span>
+  <span class="n">DENSE_RANK</span><span class="p">()</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">PARTITION</span> <span class="k">BY</span> <span class="n">city</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">salary</span> <span class="k">DESC</span><span class="p">)</span> <span class="k">AS</span> <span class="n">dense_rnk</span>
+<span class="k">FROM</span> <span class="n">my_table</span><span class="p">;</span>
+</code></pre></div></div> <h2 id="subquery">Subquery</h2> <p>Subquery trong <code class="language-plaintext highlighter-rouge">WHERE</code> (scalar/<code class="language-plaintext highlighter-rouge">IN</code>), subquery trong <code class="language-plaintext highlighter-rouge">FROM</code> (derived table), và correlated subquery (subquery tham chiếu đến cột của query bên ngoài).</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">name</span>
+<span class="k">FROM</span> <span class="n">my_table</span>
+<span class="k">WHERE</span> <span class="n">salary</span> <span class="o">&gt;</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">AVG</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">my_table</span><span class="p">);</span>
+</code></pre></div></div> <h2 id="with-common-table-expression">WITH (Common Table Expression)</h2> <p>Dùng <code class="language-plaintext highlighter-rouge">WITH</code> để đặt tên cho một subquery, giúp truy vấn dễ đọc hơn khi cần tái sử dụng cùng một tập kết quả trung gian nhiều lần.</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">WITH</span> <span class="n">city_avg</span> <span class="k">AS</span> <span class="p">(</span>
+  <span class="k">SELECT</span> <span class="n">city</span><span class="p">,</span> <span class="k">AVG</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">avg_salary</span>
+  <span class="k">FROM</span> <span class="n">my_table</span>
+  <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">city</span>
+<span class="p">)</span>
+<span class="k">SELECT</span> <span class="n">t</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">t</span><span class="p">.</span><span class="n">city</span><span class="p">,</span> <span class="n">t</span><span class="p">.</span><span class="n">salary</span><span class="p">,</span> <span class="k">c</span><span class="p">.</span><span class="n">avg_salary</span>
+<span class="k">FROM</span> <span class="n">my_table</span> <span class="n">t</span>
+<span class="k">JOIN</span> <span class="n">city_avg</span> <span class="k">c</span> <span class="k">ON</span> <span class="n">t</span><span class="p">.</span><span class="n">city</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">city</span>
+<span class="k">WHERE</span> <span class="n">t</span><span class="p">.</span><span class="n">salary</span> <span class="o">&gt;</span> <span class="k">c</span><span class="p">.</span><span class="n">avg_salary</span><span class="p">;</span>
+</code></pre></div></div> <h2 id="view-và-temporary-view">View và Temporary View</h2> <p>Phân biệt <code class="language-plaintext highlighter-rouge">createOrReplaceTempView</code> (chỉ tồn tại trong session hiện tại) và <code class="language-plaintext highlighter-rouge">createOrReplaceGlobalTempView</code> (dùng chung giữa nhiều session, lưu trong database <code class="language-plaintext highlighter-rouge">global_temp</code>). So sánh với view thông thường trong các hệ quản trị cơ sở dữ liệu (database view).</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">createOrReplaceTempView</span><span class="p">(</span><span class="sh">"</span><span class="s">my_table</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="nf">createOrReplaceGlobalTempView</span><span class="p">(</span><span class="sh">"</span><span class="s">my_global_table</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">spark</span><span class="p">.</span><span class="nf">sql</span><span class="p">(</span><span class="sh">"</span><span class="s">SELECT * FROM my_table</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">spark</span><span class="p">.</span><span class="nf">sql</span><span class="p">(</span><span class="sh">"</span><span class="s">SELECT * FROM global_temp.my_global_table</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div> </d-article> <d-appendix> <d-footnote-list></d-footnote-list> <d-citation-list></d-citation-list> </d-appendix> <d-bibliography src="/assets/bibliography/"></d-bibliography> <d-article> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/spark-overview/">Overview of Big Data Analytics</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/hadoop-overview/">Introduction to Hadoop Distributed File System</a> </li> </ul> <br> <br> </d-article> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Khanh Xuan Vu. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. Photos from <a href="https://unsplash.com" target="_blank" rel="external nofollow noopener">Unsplash</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script src="/assets/js/distillpub/overrides.js"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "post-spark-sql",
+        
+          title: "Spark SQL",
+        
+        description: "Thao tác với dữ liệu có cấu trúc bằng Spark SQL",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/spark-sql/";
+          
+        },
+      },{id: "post-overview-of-big-data-analytics",
+        
+          title: "Overview of Big Data Analytics",
+        
+        description: "Tổng quan về phân tích dữ liệu lớn",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/spark-overview/";
+          
+        },
+      },{id: "post-introduction-to-hadoop-distributed-file-system",
+        
+          title: "Introduction to Hadoop Distributed File System",
+        
+        description: "Tổng quan về HDFS",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/hadoop-overview/";
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The Godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/the_godfather/";
+            },},{id: "news-a-simple-inline-announcement",
+          title: 'A simple inline announcement.',
+          description: "",
+          section: "News",},{id: "news-a-long-announcement-with-details",
+          title: 'A long announcement with details',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/announcement_2/";
+            },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
+          title: 'A simple inline announcement with Markdown emoji! <img class="emoji" title=":sparkles:" alt=":sparkles:" src="https://github.githubassets.com/images/icons/emoji/unicode/2728.png" height="20" width="20"> <img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20">',
+          description: "",
+          section: "News",},{id: "projects-project-1",
+          title: 'project 1',
+          description: "with background image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1_project/";
+            },},{id: "projects-project-2",
+          title: 'project 2',
+          description: "a project with a background image and giscus comments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/2_project/";
+            },},{id: "projects-project-3-with-very-long-name",
+          title: 'project 3 with very long name',
+          description: "a project that redirects to another website",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/3_project/";
+            },},{id: "projects-project-4",
+          title: 'project 4',
+          description: "another without an image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/4_project/";
+            },},{id: "projects-project-5",
+          title: 'project 5',
+          description: "a project with a background image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/5_project/";
+            },},{id: "projects-project-6",
+          title: 'project 6',
+          description: "a project with no image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/6_project/";
+            },},{id: "projects-project-7",
+          title: 'project 7',
+          description: "with background image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/7_project/";
+            },},{id: "projects-project-8",
+          title: 'project 8',
+          description: "an other project with a background image and giscus comments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/8_project/";
+            },},{id: "projects-project-9",
+          title: 'project 9',
+          description: "another project with an image 🎉",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/9_project/";
+            },},{id: "teachings-data-science-fundamentals",
+          title: 'Data Science Fundamentals',
+          description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/data-science-fundamentals/";
+            },},{id: "teachings-introduction-to-machine-learning",
+          title: 'Introduction to Machine Learning',
+          description: "This course provides an introduction to machine learning concepts, algorithms, and applications. Students will learn about supervised and unsupervised learning, model evaluation, and practical implementations.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/introduction-to-machine-learning/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%6B%68%61%6E%68%76%78.%30%39@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/vukhanh09", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

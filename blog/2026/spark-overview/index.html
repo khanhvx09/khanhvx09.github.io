@@ -1,0 +1,280 @@
+<!DOCTYPE html> <html> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Overview of Big Data Analytics | Khanh Xuan Vu </title> <meta name="author" content="Khanh Xuan Vu"> <meta name="description" content="Tổng quan về phân tích dữ liệu lớn"> <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/assets/img/avatar.png?v=8ed39bb65f3f9d73a700003e5ea5cdd8"> <link rel="apple-touch-icon" href="/assets/img/avatar.png?v=8ed39bb65f3f9d73a700003e5ea5cdd8"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://khanhvx09.github.io/blog/2026/spark-overview/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> <link rel="stylesheet" href="/assets/css/al-folio-distill.css?v=fb7196ec07cb5299d51b2cbdc69c23d7"> <script>
+  window.alFolioDistill = window.alFolioDistill || {};
+  window.alFolioDistill.templateLoader = {"url":"/assets/js/distillpub/template.v2.js","integrity":"sha256-R5CDHO0C98TyAJss32l4ztqDUfAGDTtZ3Zs6qxMuJxo=","remote":false};
+</script> <script src="/assets/js/distillpub/template.v2.js" integrity="sha256-R5CDHO0C98TyAJss32l4ztqDUfAGDTtZ3Zs6qxMuJxo="></script> <script src="/assets/js/distillpub/transforms.v2.js" integrity="sha256-XYVZD1ZSuRCrJBEBl0nIPvWlo/u5tzmtyStFV7a/PTk="></script> <style type="text/css">
+        d-article h2 { margin: 1.5rem 0 1rem 0; padding-bottom: 0.5rem; }
+d-article h3 { margin-top: 1.25em; margin-bottom: 0.5em; }
+d-article p, d-article ul, d-article ol, d-article blockquote { margin-bottom: 0.75em; }
+/* Widen the article's reading column a bit, reclaiming part of Distill's
+   margin-note gutter (unused since posts don't use d-footnote/aside).
+   Stops at middle-end rather than gutter-end: extending all the way to
+   gutter-end pushed the column's visual center ~85px right of the
+   viewport's center, since the left edge is pinned at text-start by the
+   TOC sitting immediately to its left. */
+d-article > * { grid-column: text-start / middle-end !important; }
+/* Keep the table of contents pinned to the left as the article scrolls
+   (66px top offset matches the fixed navbar height used elsewhere, e.g.
+   d-footnote's scroll-margin-top). */
+d-article d-contents {
+  grid-column: 1 / 4 !important;
+  position: sticky !important;
+  top: 76px !important;
+  align-self: start !important;
+  max-height: calc(100vh - 96px);
+  overflow-y: auto;
+}
+
+      </style> </head> <body> <d-front-matter> <script async type="text/json">
+      {
+            "title": "Overview of Big Data Analytics",
+            "description": "Tổng quan về phân tích dữ liệu lớn",
+            "published": "September 22, 2026",
+            "authors": [
+              
+              {
+                "author": "Khanh Xuan Vu",
+                "authorURL": "",
+                "affiliations": [
+                  {
+                    "name": "",
+                    "url": ""
+                  }
+                ]
+              }
+              
+            ],
+            "katex": {
+              "delimiters": [
+                {
+                  "left": "$",
+                  "right": "$",
+                  "display": false
+                },
+                {
+                  "left": "$$",
+                  "right": "$$",
+                  "display": true
+                }
+              ]
+            }
+          }
+    </script> </d-front-matter> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Khanh</span> Xuan Vu </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="post distill"> <d-title> <h1>Overview of Big Data Analytics</h1> <p>Tổng quan về phân tích dữ liệu lớn</p> </d-title> <d-byline></d-byline> <d-article> <d-contents> <nav class="l-text figcaption"> <h3>Contents</h3> <div> <a href="#introduction-to-big-data">Introduction to big data</a> </div> <div> <a href="#the-mapreduce-framework">The MapReduce Framework</a> </div> <div> <a href="#apache-spark">Apache Spark</a> </div> <div> <a href="#transformation-v%C3%A0-action">Transformation và Action</a> </div> </nav> </d-contents> <p>Bài viết này sẽ cung cấp một cái nhìn tổng quan về phân tích dữ liệu lớn (big data analytics), bao gồm các khái niệm cơ bản, các công nghệ phổ biến và cách chúng được sử dụng để xử lý và phân tích dữ liệu lớn.</p> <h2 id="introduction-to-big-data">Introduction to big data</h2> <p>Theo <a href="https://www.ibm.com/think/topics/big-data" rel="external nofollow noopener" target="_blank">IBM</a>, dữ liệu lớn (big data) là một tập hợp các dữ liệu có kích thước lớn, tốc độ tăng nhanh và đa dạng, khiến các công cụ phân tích truyền thống không thể xử lý hiệu quả.</p> <p>Dưới đây là 5 chữ V (5 Vs) của dữ liệu lớn, được sử dụng để mô tả các đặc tính của dữ liệu lớn:</p> <h3 id="variety-of-data">Variety of data</h3> <p>Data có thể đến từ nhiều nguồn dữ liệu khác nhau, như là thời tiết, mạng xã hội, cảm biến IoT, giao dịch tài chính, và nhiều nguồn khác. Dữ liệu có thể ở dạng cấu trúc (structured), bán cấu trúc (semi-structured) hoặc phi cấu trúc (unstructured).</p> <h3 id="velocity-of-data">Velocity of data</h3> <p>Data có thể đến từ data warehouse, các file định kỳ hoặc các luồng dữ liệu trực tiếp (streaming data). Dữ liệu có thể được tạo ra với tốc độ cao, ví dụ như dữ liệu từ mạng xã hội hoặc cảm biến IoT. Velocity đề cập đến tốc độ mà dữ liệu được tạo ra và tốc độ mà dữ liệu cần được xử lý và phân tích.</p> <h3 id="volume-of-data">Volume of data</h3> <p>Dữ liệu lớn thường có kích thước rất lớn, từ hàng terabyte đến petabyte hoặc thậm chí exabyte. Volume đề cập đến kích thước của dữ liệu và khả năng lưu trữ và xử lý dữ liệu lớn.</p> <h3 id="veracity-of-data">Veracity of data</h3> <p>Dữ liệu lớn có thể chứa nhiều thông tin không chính xác hoặc không đầy đủ. Veracity đề cập đến độ tin cậy và chất lượng của dữ liệu, và việc xử lý dữ liệu lớn đòi hỏi các kỹ thuật để làm sạch và xác thực dữ liệu.</p> <h3 id="value-of-data">Value of data</h3> <p>Dữ liệu lớn có thể mang lại giá trị lớn nếu được phân tích và sử dụng đúng cách. Value đề cập đến khả năng khai thác giá trị từ dữ liệu lớn thông qua các kỹ thuật phân tích dữ liệu, học máy (machine learning) và trí tuệ nhân tạo (artificial intelligence).</p> <h2 id="the-mapreduce-framework">The MapReduce Framework</h2> <p>MapReduce là một mô hình (framework) được sử dụng để tính toán lượng lớn dữ liệu trong một cụm Hadoop. MapReduces chia quá trình xử lý dữ liệu thành hai bước chính: Map và Reduce. Trong bước Map, dữ liệu được chia thành các cặp key-value và được xử lý song song trên nhiều nút (nodes) trong cụm Hadoop. Trong bước Reduce, các kết quả từ bước Map được tổng hợp lại để tạo ra kết quả cuối cùng.</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/posts/hadoop/hadoop-map-reduce-480.webp 480w,/assets/img/posts/hadoop/hadoop-map-reduce-800.webp 800w,/assets/img/posts/hadoop/hadoop-map-reduce-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/posts/hadoop/hadoop-map-reduce.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="MapReduce" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> <h2 id="apache-spark">Apache Spark</h2> <p>Apache Spark là một công cụ tính toán phân tán hợp nhất (unified distributed computing engine), được thiết kế để xử lý dữ liệu lớn một cách nhanh chóng và hiệu quả.</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/posts/spark/what-is-apache-spark-480.webp 480w,/assets/img/posts/spark/what-is-apache-spark-800.webp 800w,/assets/img/posts/spark/what-is-apache-spark-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/posts/spark/what-is-apache-spark.jpeg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="MapReduce" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> <p>Apache Spark là một engine xử lý dữ liệu nhanh chóng trên RAM, giúp tăng tốc độ xử lý dữ liệu lớn so với các công cụ truyền thống như Hadoop MapReduce.</p> <p>Spark cung cấp một API dễ sử dụng cho các ngôn ngữ lập trình phổ biến như Java, Scala, Python và R, và hỗ trợ nhiều loại dữ liệu khác nhau, bao gồm dữ liệu cấu trúc, bán cấu trúc và phi cấu trúc. Các thành phần chính của Spark bao gồm Spark Core, Spark SQL, Spark Streaming, MLlib và GraphX. Spark có thể chạy trên nhiều nền tảng khác nhau, bao gồm Hadoop YARN, Apache Mesos và Kubernetes.</p> <h3 id="spark-architecture">Spark Architecture</h3> <p>Một cụm máy tính (cluster) mà Spark sẽ sử dụng để chạy các tasks được quản lý bởi một cluster manager. Chúng ta sẽ submit Spark application đến cluster manager, và cluster manager sẽ phân bổ các resources (CPU, memory) cho Spark application. Spark application sẽ được chia thành nhiều tasks và được chạy trên các worker nodes trong cụm máy tính.</p> <p>Spark Application bao gồm một driver program và nhiều executor processes. Driver program chịu trách nhiệm quản lý các tasks và phân bổ chúng cho các executor processes. Executor processes chịu trách nhiệm thực hiện các tasks và trả về kết quả cho driver program.</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/posts/spark/spark-application-480.webp 480w,/assets/img/posts/spark/spark-application-800.webp 800w,/assets/img/posts/spark/spark-application-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/posts/spark/spark-application.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Spark Application" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> <h3 id="spark-sql">Spark SQL</h3> <p>Trước Apache Spark, Apache Hive là một công cụ phổ biến để xử lý dữ liệu lớn. Hive cung cấp một ngôn ngữ truy vấn tương tự SQL. Apache Hive dịch các truy vấn SQL thành các công việc MapReduce để xử lý dữ liệu lớn. Tuy nhiên, MapReduce có thể chậm và không hiệu quả cho các truy vấn phức tạp.</p> <p>Với sự ra đời của Apache Spark, Spark SQL đã trở thành một công cụ mạnh mẽ để xử lý dữ liệu lớn. Spark SQL cung cấp một API SQL tương tự như Hive, nhưng với hiệu suất cao hơn nhiều. Spark SQL sử dụng một engine tối ưu hóa (Catalyst optimizer) để tối ưu hóa các truy vấn SQL và thực hiện chúng trên Spark Core.</p> <p>Dưới đây là một sơ đồ minh họa cách Spark SQL hoạt động:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/posts/spark/Catalyst-Optimizer-diagram-480.webp 480w,/assets/img/posts/spark/Catalyst-Optimizer-diagram-800.webp 800w,/assets/img/posts/spark/Catalyst-Optimizer-diagram-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/posts/spark/Catalyst-Optimizer-diagram.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Catalyst optimizer" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> <h3 id="spark-dataframe">Spark DataFrame</h3> <p>DataFrame là một cấu trúc dữ liệu trong Spark, tương tự như một bảng trong cơ sở dữ liệu quan hệ (relational database). DataFrame cung cấp một API dễ sử dụng để thao tác và phân tích dữ liệu, bao gồm các phép toán như lọc, nhóm, sắp xếp và tính toán các thống kê. DataFrame có thể được tạo ra từ nhiều nguồn dữ liệu khác nhau, bao gồm các file CSV, JSON, Parquet, Avro và các cơ sở dữ liệu quan hệ. DataFrame cũng hỗ trợ các phép toán SQL, cho phép người dùng viết các truy vấn SQL để thao tác và phân tích dữ liệu trong Spark.</p> <p>Đây là một ví dụ về cách tạo một DataFrame và hiển thị nội dung của nó:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">pyspark.sql.types</span> <span class="kn">import</span> <span class="n">StructType</span><span class="p">,</span> <span class="n">StructField</span><span class="p">,</span> <span class="n">StringType</span><span class="p">,</span> <span class="n">IntegerType</span>
+
+<span class="c1"># Define the schema
+</span><span class="n">schema</span> <span class="o">=</span> <span class="nc">StructType</span><span class="p">([</span>
+    <span class="nc">StructField</span><span class="p">(</span><span class="sh">"</span><span class="s">Name</span><span class="sh">"</span><span class="p">,</span> <span class="nc">StringType</span><span class="p">(),</span> <span class="bp">True</span><span class="p">),</span>
+    <span class="nc">StructField</span><span class="p">(</span><span class="sh">"</span><span class="s">Age</span><span class="sh">"</span><span class="p">,</span> <span class="nc">IntegerType</span><span class="p">(),</span> <span class="bp">True</span><span class="p">),</span>
+    <span class="nc">StructField</span><span class="p">(</span><span class="sh">"</span><span class="s">City</span><span class="sh">"</span><span class="p">,</span> <span class="nc">StringType</span><span class="p">(),</span> <span class="bp">True</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="c1"># Create some sample data
+</span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="sh">"</span><span class="s">Alice</span><span class="sh">"</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="sh">"</span><span class="s">New York</span><span class="sh">"</span><span class="p">),</span>
+    <span class="p">(</span><span class="sh">"</span><span class="s">Bob</span><span class="sh">"</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="sh">"</span><span class="s">London</span><span class="sh">"</span><span class="p">),</span>
+    <span class="p">(</span><span class="sh">"</span><span class="s">Charlie</span><span class="sh">"</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="sh">"</span><span class="s">New York</span><span class="sh">"</span><span class="p">),</span>
+    <span class="p">(</span><span class="sh">"</span><span class="s">David</span><span class="sh">"</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="sh">"</span><span class="s">Paris</span><span class="sh">"</span><span class="p">),</span>
+    <span class="p">(</span><span class="sh">"</span><span class="s">Eve</span><span class="sh">"</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="sh">"</span><span class="s">London</span><span class="sh">"</span><span class="p">),</span>
+    <span class="p">(</span><span class="sh">"</span><span class="s">Frank</span><span class="sh">"</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="sh">"</span><span class="s">New York</span><span class="sh">"</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1"># Create the DataFrame
+</span><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="nf">createDataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">DataFrame created.</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div> <table> <thead> <tr> <th>Name</th> <th>Age</th> <th>City</th> </tr> </thead> <tbody> <tr> <td>Alice</td> <td>30</td> <td>New York</td> </tr> <tr> <td>Bob</td> <td>24</td> <td>London</td> </tr> <tr> <td>Charlie</td> <td>35</td> <td>New York</td> </tr> <tr> <td>David</td> <td>29</td> <td>Paris</td> </tr> <tr> <td>Eve</td> <td>30</td> <td>London</td> </tr> <tr> <td>Frank</td> <td>40</td> <td>New York</td> </tr> </tbody> </table> <p>Chúng ta có thể thực hiện các phép toán trên DataFrame, ví dụ tính số lượng người ở mỗi thành phố:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_grouped</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="nf">groupBy</span><span class="p">(</span><span class="sh">"</span><span class="s">City</span><span class="sh">"</span><span class="p">).</span><span class="nf">count</span><span class="p">()</span>
+
+<span class="c1"># Show the result
+</span><span class="n">df_grouped</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div> <table> <thead> <tr> <th>City</th> <th>count</th> </tr> </thead> <tbody> <tr> <td>London</td> <td>2</td> </tr> <tr> <td>New York</td> <td>3</td> </tr> <tr> <td>Paris</td> <td>1</td> </tr> </tbody> </table> <p>Sử dụng câu lệnh <em>explain</em> để xem kế hoạch thực thi của truy vấn:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_grouped</span><span class="p">.</span><span class="nf">explain</span><span class="p">()</span>
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>== Physical Plan ==
+AdaptiveSparkPlan isFinalPlan=false
++- HashAggregate(keys=[City#2], functions=[count(1)])
+   +- Exchange hashpartitioning(City#2, 200), ENSURE_REQUIREMENTS, [plan_id=71]
+      +- HashAggregate(keys=[City#2], functions=[partial_count(1)])
+         +- Project [City#2]
+            +- Scan ExistingRDD[Name#0,Age#1,City#2]
+</code></pre></div></div> <p><a href="https://colab.research.google.com/drive/1Ds8wTnH4l2cexnUO7ZxSdDtLqhL6TeHc?usp=sharing" rel="external nofollow noopener" target="_blank">Source Code</a></p> <h3 id="transformation-và-action">Transformation và Action</h3> <p>Trong Spark, các phép toán trên DataFrame/RDD được chia thành hai loại: <strong>Transformation</strong> (biến đổi) và <strong>Action</strong> (hành động). Việc phân biệt rõ hai loại này là chìa khóa để hiểu cách Spark thực thi công việc.</p> <p><strong>Transformation</strong> là các phép toán tạo ra một DataFrame/RDD mới từ một DataFrame/RDD đã có, ví dụ như <code class="language-plaintext highlighter-rouge">select</code>, <code class="language-plaintext highlighter-rouge">filter</code>, <code class="language-plaintext highlighter-rouge">groupBy</code>, <code class="language-plaintext highlighter-rouge">join</code>, <code class="language-plaintext highlighter-rouge">map</code>. Transformation mang tính chất <strong>lazy evaluation</strong> (đánh giá trễ) — nghĩa là khi gọi một transformation, Spark không thực thi ngay mà chỉ ghi nhận lại phép biến đổi đó vào một kế hoạch thực thi (execution plan), cụ thể là <strong>DAG (Directed Acyclic Graph)</strong>. Đoạn code <code class="language-plaintext highlighter-rouge">df_grouped = df.groupBy("City").count()</code> ở trên chính là một transformation — nó chưa thực sự tính toán gì trên dữ liệu.</p> <p>Transformation lại được chia thành hai loại nhỏ hơn:</p> <ul> <li> <strong>Narrow transformation</strong>: mỗi partition đầu vào chỉ đóng góp cho đúng một partition đầu ra (ví dụ <code class="language-plaintext highlighter-rouge">select</code>, <code class="language-plaintext highlighter-rouge">filter</code>, <code class="language-plaintext highlighter-rouge">map</code>). Loại này không cần trộn (shuffle) dữ liệu giữa các executor nên hiệu năng cao.</li> </ul> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/posts/spark/narrow-transformation-480.webp 480w,/assets/img/posts/spark/narrow-transformation-800.webp 800w,/assets/img/posts/spark/narrow-transformation-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/posts/spark/narrow-transformation.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Narrow Transformation" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> <ul> <li> <strong>Wide transformation</strong>: dữ liệu từ nhiều partition đầu vào cần được gộp lại để tạo ra partition đầu ra (ví dụ <code class="language-plaintext highlighter-rouge">groupBy</code>, <code class="language-plaintext highlighter-rouge">join</code>, <code class="language-plaintext highlighter-rouge">distinct</code>). Loại này đòi hỏi <strong>shuffle</strong> — di chuyển dữ liệu qua lại giữa các executor trên mạng — nên thường tốn kém hơn về hiệu năng.</li> </ul> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/posts/spark/wide-transformation-480.webp 480w,/assets/img/posts/spark/wide-transformation-800.webp 800w,/assets/img/posts/spark/wide-transformation-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/posts/spark/wide-transformation.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Wide Transformation" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> <p><strong>Action</strong> là các phép toán kích hoạt Spark thực sự thực thi toàn bộ DAG đã được xây dựng từ các transformation trước đó, và trả về kết quả cho driver program hoặc ghi dữ liệu ra bên ngoài (file, database…). Một số action phổ biến: <code class="language-plaintext highlighter-rouge">show()</code>, <code class="language-plaintext highlighter-rouge">count()</code>, <code class="language-plaintext highlighter-rouge">collect()</code>, <code class="language-plaintext highlighter-rouge">explain()</code>, <code class="language-plaintext highlighter-rouge">write()</code>. Trong ví dụ trên, <code class="language-plaintext highlighter-rouge">df_grouped.show()</code> chính là action khiến Spark thực sự chạy phép <code class="language-plaintext highlighter-rouge">groupBy</code> và <code class="language-plaintext highlighter-rouge">count</code>.</p> <p>Cơ chế lazy evaluation này cho phép Spark tối ưu hóa toàn bộ chuỗi transformation trước khi thực thi (thông qua Catalyst optimizer đã đề cập ở phần Spark SQL), thay vì thực thi tuần tự từng bước một cách kém hiệu quả.</p> </d-article> <d-appendix> <d-footnote-list></d-footnote-list> <d-citation-list></d-citation-list> </d-appendix> <d-bibliography src="/assets/bibliography/"></d-bibliography> <d-article> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/spark-sql/">Spark SQL</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/hadoop-overview/">Introduction to Hadoop Distributed File System</a> </li> </ul> <br> <br> </d-article> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Khanh Xuan Vu. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. Photos from <a href="https://unsplash.com" target="_blank" rel="external nofollow noopener">Unsplash</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script src="/assets/js/distillpub/overrides.js"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "post-spark-sql",
+        
+          title: "Spark SQL",
+        
+        description: "Thao tác với dữ liệu có cấu trúc bằng Spark SQL",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/spark-sql/";
+          
+        },
+      },{id: "post-overview-of-big-data-analytics",
+        
+          title: "Overview of Big Data Analytics",
+        
+        description: "Tổng quan về phân tích dữ liệu lớn",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/spark-overview/";
+          
+        },
+      },{id: "post-introduction-to-hadoop-distributed-file-system",
+        
+          title: "Introduction to Hadoop Distributed File System",
+        
+        description: "Tổng quan về HDFS",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/hadoop-overview/";
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The Godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/the_godfather/";
+            },},{id: "news-a-simple-inline-announcement",
+          title: 'A simple inline announcement.',
+          description: "",
+          section: "News",},{id: "news-a-long-announcement-with-details",
+          title: 'A long announcement with details',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/announcement_2/";
+            },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
+          title: 'A simple inline announcement with Markdown emoji! <img class="emoji" title=":sparkles:" alt=":sparkles:" src="https://github.githubassets.com/images/icons/emoji/unicode/2728.png" height="20" width="20"> <img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20">',
+          description: "",
+          section: "News",},{id: "projects-project-1",
+          title: 'project 1',
+          description: "with background image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1_project/";
+            },},{id: "projects-project-2",
+          title: 'project 2',
+          description: "a project with a background image and giscus comments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/2_project/";
+            },},{id: "projects-project-3-with-very-long-name",
+          title: 'project 3 with very long name',
+          description: "a project that redirects to another website",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/3_project/";
+            },},{id: "projects-project-4",
+          title: 'project 4',
+          description: "another without an image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/4_project/";
+            },},{id: "projects-project-5",
+          title: 'project 5',
+          description: "a project with a background image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/5_project/";
+            },},{id: "projects-project-6",
+          title: 'project 6',
+          description: "a project with no image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/6_project/";
+            },},{id: "projects-project-7",
+          title: 'project 7',
+          description: "with background image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/7_project/";
+            },},{id: "projects-project-8",
+          title: 'project 8',
+          description: "an other project with a background image and giscus comments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/8_project/";
+            },},{id: "projects-project-9",
+          title: 'project 9',
+          description: "another project with an image 🎉",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/9_project/";
+            },},{id: "teachings-data-science-fundamentals",
+          title: 'Data Science Fundamentals',
+          description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/data-science-fundamentals/";
+            },},{id: "teachings-introduction-to-machine-learning",
+          title: 'Introduction to Machine Learning',
+          description: "This course provides an introduction to machine learning concepts, algorithms, and applications. Students will learn about supervised and unsupervised learning, model evaluation, and practical implementations.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/introduction-to-machine-learning/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%6B%68%61%6E%68%76%78.%30%39@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/vukhanh09", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>
