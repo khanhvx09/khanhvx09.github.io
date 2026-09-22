@@ -1,13 +1,14 @@
 ---
 layout: distill
-title: Data Lake, Hadoop, Spark và ETL - bức tranh tổng thể
-date: 2026-09-21 23:00:00 +0800
-description: Tổng quan big data stack, từ Hadoop đến Spark, và vị trí của ETL trong Data Lake
-tags: data-engineering data-lake hadoop spark etl
+title: Overview of Big Data Analytics
+date: 2026-09-21 08:00:00 +0800
+published: false
+description: Tổng quan phân tích dữ liệu lớn
+tags: data-engineering data-lake big-data
 categories: data-engineering
 mermaid:
-  enabled: true
-  zoomable: true
+  enabled: false
+  zoomable: false
 
 authors:
   - name: Khanh Xuan Vu
